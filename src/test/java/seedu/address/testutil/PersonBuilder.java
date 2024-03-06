@@ -93,6 +93,9 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+    /**
+     * Sets the {@code remark} of the {@code Person} that we are building.
+     */
     public PersonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
