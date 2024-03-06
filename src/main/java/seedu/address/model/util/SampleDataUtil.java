@@ -32,7 +32,7 @@ public class SampleDataUtil {
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getTagSet("family"), EMPTY_REMARK),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("classmates"),EMPTY_REMARK),
+                    new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("classmates"), EMPTY_REMARK),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), getTagSet("colleagues"), EMPTY_REMARK)
         };
