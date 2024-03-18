@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.UUID;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
@@ -64,5 +65,16 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * checks if a string is in a valid UUID format
+     * @param s
+     * @return
+     */
+    public static boolean isValidLastFourDigitsUUID(String s) {
+        String pattern = "^[a-zA-Z0-9]{4}$";
+        boolean isMatch = s.matches(pattern);
+        return isMatch;
     }
 }
