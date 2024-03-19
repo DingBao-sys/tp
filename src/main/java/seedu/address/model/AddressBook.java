@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.UUID;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -69,6 +70,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    public boolean hasPersonUUID(String uuid) {
+        requireNonNull(uuid);
+        return persons.containsPersonUUID(uuid);
+    }
+
+    public UUID getFullUUID(String digits) {
+        requireNonNull(digits);
+        return persons.getPersonFullUUID(digits);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -109,6 +120,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+    public String getRelationshipDescriptor(UUID originUUID, UUID targetUUID) {
+        return relationships.getRelationshipDescriptor(originUUID, targetUUID);
+    }
+
 
     @Override
     public boolean equals(Object other) {

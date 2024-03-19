@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.UUID;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -95,6 +96,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    /**
+     * rmb to add to interface later
+     */
+    public boolean hasPersonUUID(String uuid) {
+        requireNonNull(uuid);
+        return addressBook.hasPersonUUID(uuid);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -135,6 +145,17 @@ public class ModelManager implements Model {
      */
     public RelationshipManager getRelationships() {
         return addressBook.getRelationshipManager();
+    }
+
+    @Override
+    public String getRelationshipDescriptor(String originDigits, String targetDigits) {
+        requireNonNull(originDigits);
+        requireNonNull(targetDigits);
+        UUID originPersonUUID = addressBook.getFullUUID(originDigits);
+        UUID targetPersonUUID = addressBook.getFullUUID(targetDigits);
+        String relationshipDescriptor = addressBook.
+                getRelationshipDescriptor(originPersonUUID, targetPersonUUID);
+        return relationshipDescriptor;
     }
 
     @Override

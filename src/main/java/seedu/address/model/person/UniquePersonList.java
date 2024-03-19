@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +37,38 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
+    public boolean containsPersonUUID(String uuid) {
+        requireNonNull(uuid);
+        for (int i = 0; i < internalList.size(); i++) {
+            Person currentPerson = internalList.get(i);
+            String currentPersonUUID = currentPerson.getUuidString();
+            int uuidLen = currentPersonUUID.length();
+            String lastFourDigitsCurrentPersonUUID =
+                    currentPersonUUID.substring(uuidLen - 4);
+            boolean isMatch = lastFourDigitsCurrentPersonUUID.equals(uuid);
+            if (isMatch) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public UUID getPersonFullUUID(String digits) {
+        requireNonNull(digits);
+        for (int i = 0; i < internalList.size(); i++) {
+            Person currentPerson = internalList.get(i);
+            String currentPersonUUID = currentPerson.getUuidString();
+            int uuidLen = currentPersonUUID.length();
+            String lastFourDigitsCurrentPersonUUID =
+                    currentPersonUUID.substring(uuidLen - 4);
+            boolean isMatch = lastFourDigitsCurrentPersonUUID.equals(digits);
+            if (isMatch) {
+                return currentPerson.getUuid();
+            }
+        }
+        return null;
+    }
+
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.
@@ -47,6 +80,8 @@ public class UniquePersonList implements Iterable<Person> {
         }
         internalList.add(toAdd);
     }
+
+
 
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.

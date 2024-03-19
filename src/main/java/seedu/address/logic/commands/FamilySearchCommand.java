@@ -16,16 +16,28 @@ public class FamilySearchCommand extends Command {
             "I HAVEN'T COOK FAMILYSEARCH YET";
     public static final String MESSAGE_ARGUMENTS = "UUID: ";
 
+    public static final String MESSAGE_INVALID_UUID = "The uuid is invalid, either it does not have alphanumeric characters"
+            + "or person do not exist";
+
+    private String originUUID;
     private String targetUUID;
 
-    public FamilySearchCommand(String uuid) {
-        requireNonNull(uuid);
-        this.targetUUID = uuid;
+
+    public FamilySearchCommand(String originUUID, String targetUUID) {
+        requireNonNull(originUUID);
+        requireNonNull(targetUUID);
+        this.originUUID = originUUID;
+        this.targetUUID = targetUUID;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_USAGE + targetUUID.toString());
+        //
+        if (!model.hasPersonUUID(targetUUID) || !model.hasPersonUUID(originUUID)) {
+            throw new CommandException(MESSAGE_INVALID_UUID);
+        }
+        String getRelationShipPath = model.getRelationshipDescriptor(originUUID, targetUUID);
+        return null;
     }
 
     @Override
