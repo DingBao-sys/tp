@@ -20,7 +20,8 @@ public class FamilySearchCommandTest {
 
     @Test
     public void execute() {
-        final String UUID = "<>??";
+        final String originUUID = "<>??";
+        final String targetUUID = "789D";
         assertCommandFailure(new FamilySearchCommand(UUID), model, MESSAGE_USAGE + UUID);
     }
 
